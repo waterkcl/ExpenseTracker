@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16C68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Expense" representedClassName="Expense" syncable="YES">
+        <attribute name="expenseDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="expenseMoney" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="expenseNote" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="expenseType" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="expense" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Key" inverseName="expenseDetails" inverseEntity="Key" syncable="YES"/>
+    </entity>
+    <entity name="Income" representedClassName="Income" syncable="YES">
+        <attribute name="incomeDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="incomeMoney" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="incomeNote" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="incomeType" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="income" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Key" inverseName="incomeDetails" inverseEntity="Key" syncable="YES"/>
+    </entity>
+    <entity name="Key" representedClassName="Key" syncable="YES">
+        <attribute name="dateKey" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="expenseDetails" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Expense" inverseName="expense" inverseEntity="Expense" syncable="YES"/>
+        <relationship name="incomeDetails" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Income" inverseName="income" inverseEntity="Income" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Expense" positionX="-450" positionY="-18" width="128" height="120"/>
+        <element name="Key" positionX="-234" positionY="-22" width="128" height="90"/>
+        <element name="Income" positionX="-342" positionY="27" width="128" height="120"/>
+    </elements>
+</model>

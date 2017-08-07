@@ -16,6 +16,7 @@ class AddExpenseViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var moneyTxt: UITextField!
     @IBOutlet weak var expenseDate: UITextField!
     @IBOutlet weak var SelectCollectionView: UICollectionView!
+    let dateFormatter = DateFormatter()
     let datePicker = UIDatePicker()
     
     var  images = ["breakfast", "dinner", "snacks", "grocery", "social", "drinks", "lunch", "traffic", "fun", "clothing"]
@@ -32,6 +33,10 @@ class AddExpenseViewController: UIViewController, UICollectionViewDelegate, UICo
         
         self.SelectCollectionView.delegate = self
         self.SelectCollectionView.dataSource = self
+        
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        //dateFormatter.dateStyle = .short
+        //dateFormatter.timeStyle = .none
         
         createDatePicker()
         
@@ -51,7 +56,7 @@ class AddExpenseViewController: UIViewController, UICollectionViewDelegate, UICo
             let fetchRequest : NSFetchRequest<NSFetchRequestResult>
             
             if #available(iOS 10.0, *) {
-                fetchRequest = Expense.fetchRequest()
+                fetchRequest = Key.fetchRequest()
             } else {
                 fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Key")
             }
@@ -72,6 +77,7 @@ class AddExpenseViewController: UIViewController, UICollectionViewDelegate, UICo
                     expense.addToExpenseDetails(details)
                     do {
                         try context.save()
+                        self.navigationController?.popToRootViewController(animated: true)
                     } catch  {
                         print ("Error \(error)")
                     }
@@ -90,6 +96,7 @@ class AddExpenseViewController: UIViewController, UICollectionViewDelegate, UICo
                     
                     do {
                         try context.save()
+                        self.navigationController?.popToRootViewController(animated: true)
                     } catch  {
                         print ("Error \(error)")
                     }
@@ -129,14 +136,7 @@ class AddExpenseViewController: UIViewController, UICollectionViewDelegate, UICo
         
     }
     
-    
-    
     func donePressed(){
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
-        
         datePickerTxt.text = dateFormatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }

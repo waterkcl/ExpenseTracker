@@ -44,7 +44,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         totalAmount = 0
-        print(expenseArray)
+        //print(expenseArray)
         currentIndex=0
         totalIndex=0
         fetchExpenseData()
@@ -126,18 +126,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if currentIndex>0 {
                     currentIndex -= 1
                     fetchExpenseData()
+                    getTotal()
                 }
             } else if gesture.direction == UISwipeGestureRecognizerDirection.left {
                 print("Swipe Left")
                 if currentIndex<totalIndex-1 {
                     currentIndex += 1
                     fetchExpenseData()
+                    getTotal()
                 }
             }
         }
     }
     
     func getTotal(){
+        totalAmount=0
         for details in detailsArray {
             totalAmount=totalAmount+Int(details.expenseMoney)
         }
